@@ -131,7 +131,6 @@ console.log("🌍 CLIENT_URL:", process.env.CLIENT_URL);
   } catch (err) {
     console.error('❌ Error creando sesión de Stripe:', err.message, err);
 
-    console.error('❌ Error creando sesión de Stripe:', err.message);
     res.status(500).json({ error: 'Error al crear la sesión de pago' });
   }
 });

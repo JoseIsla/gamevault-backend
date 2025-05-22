@@ -51,6 +51,11 @@ mongoose.connect(process.env.MONGO_URI, {
     process.exit(1);
   });
 
+  app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Backend funcionando correctamente 🚀' });
+});
+
+
 // Lanzar servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

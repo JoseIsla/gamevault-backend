@@ -53,6 +53,10 @@ router.get('/user/:userId', async (req, res) => {
 
 
 router.post('/create-checkout-session', async (req, res) => {
+
+  console.log("🔐 STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY ? "OK" : "MISSING");
+console.log("🌍 CLIENT_URL:", process.env.CLIENT_URL);
+
   try {
     const { items, coupon, subtotal, discount, total, currency, userId } = req.body;
     const finalCurrency = currency?.toLowerCase() || 'eur';
@@ -125,6 +129,8 @@ router.post('/create-checkout-session', async (req, res) => {
 
     res.status(200).json({ id: session.id });
   } catch (err) {
+    console.error('❌ Error creando sesión de Stripe:', err.message, err);
+
     console.error('❌ Error creando sesión de Stripe:', err.message);
     res.status(500).json({ error: 'Error al crear la sesión de pago' });
   }
